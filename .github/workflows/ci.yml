@@ -1,0 +1,35 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build binaries
+        run: make build
+      - name: Assemble app bundle
+        run: make app
+      - name: Generate Quick Action workflows
+        run: python3 make-workflows.py
+      - name: Lint generated plists
+        run: |
+          plutil -lint "$HOME/Library/Services/📌 Pin.workflow/Contents/document.wflow"
+          plutil -lint "$HOME/Library/Services/📌 Pin on Top.workflow/Contents/document.wflow"
+          plutil -lint "$HOME/Library/Services/📌 Pin to Sidebar.workflow/Contents/document.wflow"
+      - name: Smoke-test pin scripts
+        run: |
+          set -e
+          S=$(mktemp -d)
+          mkdir "$S/proj"; touch "$S/file.txt"
+          zsh pin-on-top.sh "$S/proj" "$S/file.txt"
+          test -L "$S/ 📌 proj" && test -L "$S/ 📌 file.txt"
+          zsh pin-on-top.sh "$S/proj" "$S/file.txt"
+          test ! -e "$S/ 📌 proj" && test ! -e "$S/ 📌 file.txt"
+          HOME="$S" zsh pin-append.sh "$S/proj"
+          grep -qxF "$S/proj" "$S/.pinned-folders"
+          ./pinsidebar list

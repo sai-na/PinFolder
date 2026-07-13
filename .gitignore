@@ -1,0 +1,6 @@
+# build artifacts (everything builds locally via `make`)
+/PinFolder
+/pinsidebar
+/PinFolder.app/
+
+.DS_Store
