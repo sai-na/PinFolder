@@ -48,7 +48,7 @@ h1 em{font-style:italic; font-weight:400; color:var(--red)}
 .install{
   display:flex; align-items:stretch; border:1.5px solid var(--ink); border-radius:12px;
   background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:1.02rem;
-  overflow:hidden; box-shadow:6px 6px 0 var(--line);
+  overflow:hidden; box-shadow:6px 6px 0 var(--line); max-width:fit-content;
 }
 .install code{padding:1.15rem 1.3rem; flex:1; white-space:pre; overflow-x:auto; line-height:1.8}
 .install code .c{color:#8b857a}
@@ -260,10 +260,13 @@ footer{padding:54px 0 70px; display:flex; justify-content:space-between; align-i
 footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
 
 @media (max-width:880px){
-  .hero{grid-template-columns:1fr; padding:34px 0 60px}
+  .hero{grid-template-columns:1fr; gap:36px; padding:26px 0 44px}
+  section{padding:52px 0}
+  .feature{margin:56px 0 0}
+  .scene{height:470px}
   .features{grid-template-columns:1fr}
   .plain,.steps{grid-template-columns:1fr; gap:32px}
-  .finder{transform:none}
+  .finder{transform:none; max-width:560px}
   @keyframes drop{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 }
 @media (prefers-reduced-motion:reduce){
