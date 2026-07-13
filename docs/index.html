@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PinFolder — pin anything on macOS</title>
+<meta name="description" content="Pin files & folders on macOS three ways from one right-click: a menu-bar quick-open list, pin to the top of a Finder folder, pin to the sidebar. Open source, plain-text simple.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📌</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf5ec; --paper-deep:#f3ecdf; --ink:#211d17; --ink-soft:#5c554a;
+  --red:#c33d21; --red-deep:#9e2f18; --blue:#2563eb; --line:#e2d8c6;
+  --row:#fffdf8; --sel:#dbe7ff;
+  --serif:"Fraunces",Georgia,serif; --body:"Newsreader",Georgia,serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body); background:var(--paper); color:var(--ink);
+  font-size:19px; line-height:1.6; overflow-x:hidden; position:relative;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:999; opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
+a{color:var(--red); text-decoration-thickness:1px; text-underline-offset:3px}
+a:hover{color:var(--red-deep)}
+.wrap{max-width:1060px; margin:0 auto; padding:0 24px}
+
+/* header */
+header{display:flex; justify-content:space-between; align-items:center; padding:28px 0}
+.mark{font-family:var(--serif); font-weight:900; font-size:1.25rem; letter-spacing:-.01em; text-decoration:none; color:var(--ink)}
+.mark .pin{display:inline-block; transform:rotate(-12deg); margin-right:.35rem}
+nav a{font-family:var(--mono); font-size:.8rem; text-decoration:none; color:var(--ink-soft); margin-left:1.6rem; text-transform:uppercase; letter-spacing:.08em}
+nav a:hover{color:var(--red)}
+
+/* hero */
+.hero{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; padding:64px 0 90px}
+h1{
+  font-family:var(--serif); font-weight:900; font-size:clamp(2.6rem,5.4vw,4.3rem);
+  line-height:1.02; letter-spacing:-.025em;
+}
+h1 em{font-style:italic; font-weight:400; color:var(--red)}
+.hero p.lede{margin:1.4rem 0 2rem; font-size:1.18rem; color:var(--ink-soft); max-width:34rem}
+.install{
+  display:flex; align-items:stretch; border:1.5px solid var(--ink); border-radius:10px;
+  background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:.86rem;
+  overflow:hidden; max-width:30rem; box-shadow:5px 5px 0 var(--line);
+}
+.install code{padding:.95rem 1.2rem; flex:1; white-space:nowrap; overflow-x:auto}
+.install code .c{color:#8b857a}
+.install button{
+  border:0; background:var(--red); color:#fff; font-family:var(--mono); font-size:.78rem;
+  padding:0 1.1rem; cursor:pointer; letter-spacing:.05em;
+}
+.install button:hover{background:var(--red-deep)}
+.hero .ghlink{display:inline-block; margin-top:1.1rem; font-family:var(--mono); font-size:.82rem}
+
+/* finder mockup */
+.finder{
+  background:var(--row); border:1.5px solid var(--ink); border-radius:14px;
+  box-shadow:10px 12px 0 var(--line), 0 30px 60px -30px rgba(60,40,10,.35);
+  transform:rotate(1.4deg); font-size:.86rem; overflow:hidden;
+  animation:drop .8s cubic-bezier(.2,1.4,.4,1) both .15s;
+}
+@keyframes drop{from{opacity:0; transform:rotate(1.4deg) translateY(26px)}to{opacity:1; transform:rotate(1.4deg) translateY(0)}}
+.finder .bar{display:flex; align-items:center; gap:8px; padding:11px 14px; border-bottom:1px solid var(--line); background:var(--paper-deep)}
+.finder .dot{width:11px;height:11px;border-radius:50%}
+.finder .dot:nth-child(1){background:#f26257}.finder .dot:nth-child(2){background:#fcbb2d}.finder .dot:nth-child(3){background:#33c748}
+.finder .title{font-family:var(--mono); font-size:.72rem; color:var(--ink-soft); margin-left:8px}
+.finder .cols{display:flex; justify-content:space-between; padding:7px 16px; font-family:var(--mono); font-size:.66rem; color:var(--ink-soft); border-bottom:1px solid var(--line)}
+.finder ul{list-style:none}
+.finder li{
+  display:flex; align-items:center; gap:9px; padding:8px 16px; border-bottom:1px solid #f1ead9;
+  font-family:var(--mono); font-size:.78rem; opacity:0; animation:rowin .45s ease-out forwards;
+}
+.finder li:nth-child(2){animation-delay:.55s}.finder li:nth-child(3){animation-delay:.65s}
+.finder li:nth-child(4){animation-delay:.75s}.finder li:nth-child(5){animation-delay:.85s}
+.finder li:nth-child(6){animation-delay:.95s}.finder li:nth-child(7){animation-delay:1.05s}
+@keyframes rowin{from{opacity:0; transform:translateX(-8px)}to{opacity:1; transform:none}}
+.finder li.pinned{
+  background:var(--sel); font-weight:500; border-bottom:1px solid #c9d9fb;
+  animation:pindrop .7s cubic-bezier(.2,1.6,.35,1) forwards 1.35s;
+}
+@keyframes pindrop{from{opacity:0; transform:translateY(-14px)}to{opacity:1; transform:none}}
+.finder li.pinned .pin{display:inline-block; animation:wiggle 2.6s ease-in-out infinite 2.2s; transform-origin:bottom left}
+@keyframes wiggle{0%,88%,100%{transform:rotate(0)}92%{transform:rotate(-14deg)}96%{transform:rotate(8deg)}}
+.finder li .meta{margin-left:auto; color:var(--ink-soft); font-size:.68rem}
+.finder li.dim{color:var(--ink-soft)}
+
+/* sections */
+section{padding:74px 0}
+.kicker{font-family:var(--mono); font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--red)}
+h2{font-family:var(--serif); font-weight:900; font-size:clamp(1.9rem,3.4vw,2.7rem); letter-spacing:-.02em; line-height:1.08; margin:.5rem 0 1rem}
+.features{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:2.4rem}
+.card{
+  border:1.5px solid var(--ink); border-radius:14px; background:var(--row); padding:26px 24px 24px;
+  box-shadow:5px 6px 0 var(--line); transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{transform:translate(-2px,-3px); box-shadow:8px 10px 0 var(--line)}
+.card .n{font-family:var(--mono); font-size:.7rem; color:var(--ink-soft); letter-spacing:.1em}
+.card h3{font-family:var(--serif); font-weight:600; font-size:1.35rem; margin:.45rem 0 .55rem}
+.card p{font-size:.98rem; color:var(--ink-soft)}
+.card .demo{
+  margin-top:1.2rem; border:1px solid var(--line); border-radius:9px; background:var(--paper-deep);
+  font-family:var(--mono); font-size:.72rem; padding:12px 14px; line-height:1.9;
+}
+.card .demo .hl{background:var(--sel); border-radius:4px; padding:1px 6px}
+.card .demo .fade{color:#9a9182}
+
+/* plain text section */
+.plain{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
+.plain ulx{display:block}
+.plain li{margin:.65rem 0 .65rem 1.2rem}
+.term{
+  background:var(--ink); color:#efe8da; border-radius:12px; padding:20px 22px;
+  font-family:var(--mono); font-size:.8rem; line-height:1.85; box-shadow:8px 9px 0 var(--line);
+  transform:rotate(-1deg);
+}
+.term .p{color:#7fd18a}.term .c{color:#8b857a}
+
+/* install */
+.installbig{background:var(--paper-deep); border-top:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink)}
+.steps{display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:2rem; align-items:start}
+.stepcode{background:var(--ink); color:#efe8da; border-radius:12px; padding:22px 24px; font-family:var(--mono); font-size:.84rem; line-height:2}
+.stepcode .c{color:#8b857a}
+.note{font-size:.95rem; color:var(--ink-soft)}
+.note strong{color:var(--ink)}
+.note p{margin-bottom:.9rem}
+
+footer{padding:54px 0 70px; display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px}
+footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
+
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr; padding:34px 0 60px}
+  .features{grid-template-columns:1fr}
+  .plain,.steps{grid-template-columns:1fr; gap:32px}
+  .finder{transform:none}
+  @keyframes drop{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-delay:0s !important; transition:none !important}
+  .finder li,.finder li.pinned{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <a class="mark" href="#"><span class="pin">📌</span>PinFolder</a>
+  <nav>
+    <a href="#how">How</a>
+    <a href="#install">Install</a>
+    <a href="https://github.com/sai-na/PinFolder">GitHub</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Pin anything.<br><em>Right where you look.</em></h1>
+    <p class="lede">Finder has favourites, but no pins. PinFolder adds them — a menu-bar quick-open list, a pin that floats a file to the top of its own folder, and a sidebar toggle. All from one right-click.</p>
+    <div class="install">
+      <code id="cmd"><span class="c">$</span> git clone https://github.com/sai-na/PinFolder && cd PinFolder && make install</code>
+      <button onclick="navigator.clipboard.writeText('git clone https://github.com/sai-na/PinFolder && cd PinFolder && make install').then(()=>{this.textContent='COPIED';setTimeout(()=>this.textContent='COPY',1400)})">COPY</button>
+    </div>
+    <a class="ghlink" href="https://github.com/sai-na/PinFolder">★ Free & open source · MIT · builds locally in seconds</a>
+  </div>
+
+  <div class="finder" role="img" aria-label="A Finder window with a pinned file sorted to the top">
+    <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">~/Downloads</span></div>
+    <div class="cols"><span>Name ↑</span><span>Kind</span></div>
+    <ul>
+      <li class="pinned"><span class="pin">📌</span> the-one-file-i-need.pdf<span class="meta">Shortcut</span></li>
+      <li class="dim">.config<span class="meta">Folder</span></li>
+      <li class="dim">[archive] 2025<span class="meta">Folder</span></li>
+      <li>brand-assets<span class="meta">Folder</span></li>
+      <li>invoices<span class="meta">Folder</span></li>
+      <li>screenshots<span class="meta">Folder</span></li>
+      <li class="dim">the-one-file-i-need.pdf<span class="meta">PDF</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="how">
+  <span class="kicker">One right-click, three pins</span>
+  <h2>Pick where it should follow you.</h2>
+  <div class="features">
+    <div class="card">
+      <div class="n">01 · 📌 PIN</div>
+      <h3>To the menu bar</h3>
+      <p>A 📌 in the macOS menu bar lists your pins from anywhere — folders open in Finder, files open in their app. It's a plain text file underneath.</p>
+      <div class="demo">📌 ▾<br><span class="hl">project-alpha</span><br>tax-2026.numbers<br>Downloads</div>
+    </div>
+    <div class="card">
+      <div class="n">02 · 📌 PIN ON TOP</div>
+      <h3>To the top of its folder</h3>
+      <p>Creates a tiny <code>&nbsp;📌&nbsp;name</code> shortcut that out-sorts every other name — dotfiles and [brackets] included. Your original is never renamed.</p>
+      <div class="demo"><span class="hl">📌 keynote.key</span><br><span class="fade">.DS_Store</span><br>assets<br><span class="fade">keynote.key</span></div>
+    </div>
+    <div class="card">
+      <div class="n">03 · 📌 PIN TO SIDEBAR</div>
+      <h3>To the Finder sidebar</h3>
+      <p>Toggles the item in Favourites — same as dragging it there, without the dragging. Right-click again to remove.</p>
+      <div class="demo">Favourites<br>&nbsp;&nbsp;Desktop<br>&nbsp;&nbsp;Downloads<br>&nbsp;&nbsp;<span class="hl">project-alpha</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="plain">
+    <div>
+      <span class="kicker">No daemon · no database · no cloud</span>
+      <h2>Plain text all the way down.</h2>
+      <p>Your pins live in <code style="font-family:var(--mono);font-size:.85em">~/.pinned-folders</code> — one path per line. Edit it by hand, sync it in dotfiles, <code style="font-family:var(--mono);font-size:.85em">grep</code> it. Pin-on-top shortcuts are ordinary symlinks. Deleted items disappear from the menu on their own, and <code style="font-family:var(--mono);font-size:.85em">make uninstall</code> leaves nothing behind but your own files.</p>
+    </div>
+    <div class="term">
+      <span class="c"># the whole "database"</span><br>
+      <span class="p">$</span> cat ~/.pinned-folders<br>
+      /Users/you/Projects/alpha<br>
+      /Users/you/Downloads/brief.pdf<br>
+      /Users/you/Documents/GitHub
+    </div>
+  </div>
+</section>
+
+<section class="installbig" id="install">
+  <div class="wrap" style="padding:0">
+    <span class="kicker">Install</span>
+    <h2>Three lines. No App Store, no Gatekeeper dance.</h2>
+    <div class="steps">
+      <div class="stepcode">
+        <span class="c"># needs Xcode Command Line Tools</span><br>
+        git clone https://github.com/sai-na/PinFolder<br>
+        cd PinFolder<br>
+        make install
+      </div>
+      <div class="note">
+        <p><strong>Everything compiles on your Mac in seconds</strong> — a ~100-line Swift menu-bar app and a small sidebar helper — so there's no unsigned binary for macOS to quarantine.</p>
+        <p>If the Quick Actions don't appear at first, enable them once in <strong>System Settings → Extensions → Finder</strong>. Honest caveats: Pin on Top only wins under Name ↑ sorting with groups off, and pinned items appear twice (shortcut + original) — the price of never renaming your files.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="mark"><span class="pin">📌</span>PinFolder</span>
+  <span class="fm"><a href="https://github.com/sai-na/PinFolder">GitHub</a> · <a href="https://github.com/sai-na/PinFolder/blob/main/LICENSE">MIT License</a> · made for macOS</span>
+</footer>
+</div>
+
+</body>
+</html>
