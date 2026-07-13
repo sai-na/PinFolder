@@ -162,16 +162,23 @@ h2{font-family:var(--serif); font-weight:900; font-size:clamp(1.9rem,3.4vw,2.7re
 .tgt .dt,.tgt .kd{animation:tgtmeta 11s infinite}
 @keyframes tgtsel{0%,4%{background:transparent;color:inherit}5%,39%{background:#2864e0;color:#fff}41%,100%{background:transparent;color:inherit}}
 @keyframes tgtmeta{0%,4%{color:#86868b}5%,39%{color:#cfe0ff}41%,100%{color:#86868b}}
+.menus{position:absolute; left:33%; top:2.5%; z-index:6}
 .cm{
-  position:absolute; z-index:6; background:rgba(247,247,249,.98); border-radius:8px;
+  background:rgba(247,247,249,.98); border-radius:8px;
   border:.5px solid #c9c9cc; box-shadow:0 12px 30px rgba(0,0,0,.25); padding:4px;
-  font-size:12px; min-width:186px; opacity:0; transform:scale(.95); transform-origin:top left;
+  font-size:11.5px; min-width:214px; opacity:0; transform:scale(.95);
 }
-.cm div{padding:3.5px 10px; border-radius:5px; display:flex; gap:8px; align-items:center; white-space:nowrap}
+.cm div{padding:3px 10px; border-radius:5px; display:flex; gap:8px; align-items:center; white-space:nowrap}
 .cm .sep{height:1px; background:#dcdcda; margin:4px 8px; padding:0}
 .cm .sub::after{content:"\25B8"; margin-left:auto; padding-left:16px; color:#86868b}
-.cm1{left:31%; top:42%; animation:cmin1 11s infinite}
-.cm2{left:57%; top:56%; min-width:196px; animation:cmin2 11s infinite}
+.cm .dots{display:flex; gap:7px; padding:5px 10px}
+.cm .dots i{width:12px;height:12px;border-radius:50%;display:block}
+.cm1{transform-origin:top left; animation:cmin1 11s infinite}
+/* submenu sits flush against the parent, top-aligned to the Quick Actions row */
+.cm2{
+  position:absolute; left:calc(100% - 5px); top:calc(100% - 30px); min-width:172px;
+  transform-origin:top left; animation:cmin2 11s infinite;
+}
 @keyframes cmin1{0%,8%{opacity:0;transform:scale(.95)}10%,39%{opacity:1;transform:scale(1)}41%,100%{opacity:0;transform:scale(.95)}}
 @keyframes cmin2{0%,18%{opacity:0;transform:scale(.95)}20%,39%{opacity:1;transform:scale(1)}41%,100%{opacity:0;transform:scale(.95)}}
 .cm1 .svc{animation:svchl 11s infinite}
@@ -216,9 +223,10 @@ h2{font-family:var(--serif); font-weight:900; font-size:clamp(1.9rem,3.4vw,2.7re
   .wsb{display:none}
   .wcols .c2,.wrows .dt{display:none}
   .s3 .wsb{display:block; width:132px}
-  .cm{min-width:150px; font-size:11px}
-  .cm1{left:14%; top:38%}
-  .cm2{left:46%; top:52%}
+  .menus{left:5%; top:2%}
+  .cm{min-width:158px; font-size:10.5px}
+  .cm div{padding:2.5px 9px}
+  .cm2{left:calc(100% - 44px)}
   .dd{right:12px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -342,24 +350,34 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
           </div>
         </div>
       </div>
+      <div class="menus">
       <div class="cm cm1">
-        <div>Open in New Tab</div>
+        <div>Open</div>
+        <div class="sub">Open With</div>
+        <div class="sep"></div>
+        <div>Move to Bin</div>
         <div class="sep"></div>
         <div>Get Info</div>
+        <div>Rename</div>
+        <div>Compress “GitHub”</div>
+        <div>Duplicate</div>
+        <div>Quick Look</div>
         <div class="sep"></div>
-        <div>Copy “GitHub” as Pathname</div>
-        <div>Open in Terminal</div>
+        <div>Copy</div>
+        <div>Share…</div>
+        <div class="sep"></div>
+        <div class="dots"><i style="background:#ff5e57"></i><i style="background:#ffa834"></i><i style="background:#ffd634"></i><i style="background:#48d15e"></i><i style="background:#3f9ef8"></i><i style="background:#c86ee8"></i><i style="background:#98989d"></i></div>
+        <div>Tags…</div>
         <div class="sep"></div>
         <div class="svc sub">Quick Actions</div>
       </div>
       <div class="cm cm2">
-        <div>Markup</div>
-        <div>Create PDF</div>
         <div class="pick">📌 Pin</div>
         <div>📌 Pin on Top</div>
         <div>📌 Pin to Sidebar</div>
         <div class="sep"></div>
         <div>Customise…</div>
+      </div>
       </div>
       <div class="dd">
         <div class="new"><span class="wig">📌</span><span class="ifold"></span>GitHub</div>
@@ -408,24 +426,34 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
           </div>
         </div>
       </div>
+      <div class="menus">
       <div class="cm cm1">
-        <div>Open in New Tab</div>
+        <div>Open</div>
+        <div class="sub">Open With</div>
+        <div class="sep"></div>
+        <div>Move to Bin</div>
         <div class="sep"></div>
         <div>Get Info</div>
+        <div>Rename</div>
+        <div>Compress “GitHub”</div>
+        <div>Duplicate</div>
+        <div>Quick Look</div>
         <div class="sep"></div>
-        <div>Copy “GitHub” as Pathname</div>
-        <div>Open in Terminal</div>
+        <div>Copy</div>
+        <div>Share…</div>
+        <div class="sep"></div>
+        <div class="dots"><i style="background:#ff5e57"></i><i style="background:#ffa834"></i><i style="background:#ffd634"></i><i style="background:#48d15e"></i><i style="background:#3f9ef8"></i><i style="background:#c86ee8"></i><i style="background:#98989d"></i></div>
+        <div>Tags…</div>
         <div class="sep"></div>
         <div class="svc sub">Quick Actions</div>
       </div>
       <div class="cm cm2">
-        <div>Markup</div>
-        <div>Create PDF</div>
         <div>📌 Pin</div>
         <div class="pick">📌 Pin on Top</div>
         <div>📌 Pin to Sidebar</div>
         <div class="sep"></div>
         <div>Customise…</div>
+      </div>
       </div>
     </div>
     <p class="fcap">// the shortcut lands above .config and [archive] 2025 — whitespace out-sorts punctuation</p>
@@ -466,24 +494,34 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
           </div>
         </div>
       </div>
+      <div class="menus">
       <div class="cm cm1">
-        <div>Open in New Tab</div>
+        <div>Open</div>
+        <div class="sub">Open With</div>
+        <div class="sep"></div>
+        <div>Move to Bin</div>
         <div class="sep"></div>
         <div>Get Info</div>
+        <div>Rename</div>
+        <div>Compress “GitHub”</div>
+        <div>Duplicate</div>
+        <div>Quick Look</div>
         <div class="sep"></div>
-        <div>Copy “GitHub” as Pathname</div>
-        <div>Open in Terminal</div>
+        <div>Copy</div>
+        <div>Share…</div>
+        <div class="sep"></div>
+        <div class="dots"><i style="background:#ff5e57"></i><i style="background:#ffa834"></i><i style="background:#ffd634"></i><i style="background:#48d15e"></i><i style="background:#3f9ef8"></i><i style="background:#c86ee8"></i><i style="background:#98989d"></i></div>
+        <div>Tags…</div>
         <div class="sep"></div>
         <div class="svc sub">Quick Actions</div>
       </div>
       <div class="cm cm2">
-        <div>Markup</div>
-        <div>Create PDF</div>
         <div>📌 Pin</div>
         <div>📌 Pin on Top</div>
         <div class="pick">📌 Pin to Sidebar</div>
         <div class="sep"></div>
         <div>Customise…</div>
+      </div>
       </div>
     </div>
     <p class="fcap">// GitHub slides into Favourites — in every window and every open/save dialog</p>
