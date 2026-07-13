@@ -64,7 +64,7 @@ open /Applications/PinFolder.app
 
 A 📌 appears in the menu bar. `LSUIElement` = menu-bar only, no Dock icon.
 
-**Start at login:** System Settings → General → Login Items → **+** → pick `/Applications/PinFolder.app`.
+**Start at login is on by default** (registered via `SMAppService` on first launch, macOS 13+). Toggle it in the 📌 menu → **Settings…**, which also has a "Sort pins alphabetically" option.
 
 ---
 

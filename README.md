@@ -29,13 +29,14 @@ cd PinFolder
 make install
 ```
 
-A 📌 appears in the menu bar and the three Quick Actions register with Finder.
-If they don't show up in the right-click menu, enable them once in
+A 📌 appears in the menu bar, and macOS shows three install prompts — click
+**Install** on each to register the Quick Actions with Finder. If they don't
+show up in the right-click menu afterwards, enable them once in
 **System Settings → General → Login Items & Extensions → Extensions → Finder**
 (or right-click → Quick Actions → Customise…).
 
-To start the menu-bar app at login: System Settings → General → Login Items →
-**+** → `/Applications/PinFolder.app`.
+The app starts at login by default. Change that — or turn on alphabetical
+sorting for the pin list — in the 📌 menu → **Settings…**.
 
 ## Uninstall
 
