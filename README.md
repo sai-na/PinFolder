@@ -13,6 +13,20 @@ Actions that fix that:
 | **📌 Pin on Top** | Floats the item to the **top of its own folder** in Finder by creating a ` 📌 name` shortcut that sorts before everything else. The original is never renamed or touched. Run again to unpin. |
 | **📌 Pin to Sidebar** | Toggles the item in the Finder sidebar **Favourites**. |
 
+## See it in action
+
+**📌 Pin — to the menu bar**
+
+![Right-click a folder, Quick Actions, Pin — it appears in the menu-bar 📌 list](docs/assets/pin-menubar.gif)
+
+**📌 Pin on Top — to the top of its folder**
+
+![Pin on Top floats a shortcut above every other name, dotfiles included](docs/assets/pin-on-top.gif)
+
+**📌 Pin to Sidebar — Finder Favourites**
+
+![Pin to Sidebar toggles the folder in the Finder sidebar](docs/assets/pin-sidebar.gif)
+
 Everything is stored in plain, inspectable places: the menu-bar list is a text
 file (`~/.pinned-folders`, one path per line — edit it by hand any time), and
 Pin on Top shortcuts are ordinary symlinks.
