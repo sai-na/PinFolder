@@ -2,6 +2,8 @@
 
 Pin any file or folder on macOS — three ways, from one right-click.
 
+**Website:** [sai-na.github.io/PinFolder](https://sai-na.github.io/PinFolder/)
+
 Finder has no "pin" concept: you can't keep a favourite folder at the top of a
 directory listing, and quick access means dragging things to the Dock or
 sidebar by hand. PinFolder adds a tiny menu-bar app plus three Finder Quick
@@ -63,12 +65,24 @@ sorting for the pin list — in the 📌 menu → **Settings…**.
 
 ## Uninstall
 
+**If you installed with Homebrew:**
+
+```bash
+pinfolder-setup uninstall   # removes the app + the three Quick Actions
+brew uninstall pinfolder    # removes the Homebrew package
+```
+
+**If you installed from a clone:**
+
 ```bash
 make uninstall
 ```
 
-Your pins file, ` 📌 ` shortcut symlinks, and sidebar entries are left alone —
-delete them whenever you like (they're just a text file and symlinks).
+Both leave your own data alone — `~/.pinned-folders` (your pins list), any
+` 📌 ` shortcut symlinks from Pin on Top, and sidebar Favourites entries.
+They're just a text file, plain symlinks, and normal sidebar items: delete the
+file, delete the symlinks, and right-click a sidebar entry → **Remove from
+Sidebar** whenever you like.
 
 ## How it works
 
