@@ -1,22 +1,29 @@
 #!/usr/bin/env python3
-"""Generate both PinFolder Finder Quick Action bundles in ~/Library/Services:
+"""Generate the three PinFolder Finder Quick Action bundles:
 
-  📌 Pin.workflow         <- pin-append.sh  (add to the menu-bar app's list)
-  📌 Pin on Top.workflow  <- pin-on-top.sh  (toggle a sort-first name prefix)
+  📌 Pin.workflow            <- pin-append.sh   (add to the menu-bar app's list)
+  📌 Pin on Top.workflow     <- pin-on-top.sh   (toggle a sort-first shortcut)
+  📌 Pin to Sidebar.workflow <- pin-sidebar.sh  (toggle in Finder Favourites)
+
+Bundles land in ./build/workflows by default (pass a directory to override).
+Install them by opening each one — the system Automator Installer registers
+them as proper Finder Quick Actions:
+  open "build/workflows/📌 Pin.workflow"
 
 Built with plistlib so the shell scripts land in document.wflow correctly
-escaped. Re-run after editing either .sh file, then:
-  /System/Library/CoreServices/pbs -update
+escaped. Re-run after editing any .sh file.
 """
 import os
+import sys
 import plistlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+OUTDIR = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "build", "workflows")
 
 
 def build(menu_name, script_file):
     script = open(os.path.join(HERE, script_file)).read()
-    wf = os.path.expanduser(f"~/Library/Services/{menu_name}.workflow")
+    wf = os.path.join(OUTDIR, f"{menu_name}.workflow")
 
     info = {
         "NSServices": [

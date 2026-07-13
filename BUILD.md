@@ -68,25 +68,29 @@ A 📌 appears in the menu bar. `LSUIElement` = menu-bar only, no Dock icon.
 
 ---
 
-## Step 2. Install both right-click Quick Actions
+## Step 2. Install the three right-click Quick Actions
 
-A generator script builds both `.workflow` bundles directly into `~/Library/Services` — no Automator clicking:
+A generator script builds the `.workflow` bundles into `build/workflows/`, and the system **Automator Installer** registers them (this is the important part — installing via the system prompt is what registers them as real Quick Actions with `FinderPreview`/`TouchBar` presentation modes, so they appear under right-click → **Quick Actions**, not only buried in the Services submenu):
 
 ```bash
 cd ~/Documents/GitHub/pinFolder
-python3 make-workflows.py   # installs "📌 Pin", "📌 Pin on Top", "📌 Pin to Sidebar"
-/System/Library/CoreServices/pbs -update
+python3 make-workflows.py
+open "build/workflows/📌 Pin.workflow"            # click Install
+open "build/workflows/📌 Pin on Top.workflow"     # click Install
+open "build/workflows/📌 Pin to Sidebar.workflow" # click Install
 ```
 
-The shell logic lives in [`pin-append.sh`](pin-append.sh) (📌 Pin: add to the menu-bar list) and [`pin-on-top.sh`](pin-on-top.sh) (📌 Pin on Top: rename toggle, see Step 3). Edit a script, re-run the generator, and the installed action updates.
+The shell logic lives in [`pin-append.sh`](pin-append.sh) (📌 Pin: add to the menu-bar list), [`pin-on-top.sh`](pin-on-top.sh) (📌 Pin on Top, see Step 3), and [`pin-sidebar.sh`](pin-sidebar.sh) (Step 4). Edit a script, re-run the generator, and re-open the workflow to update the installed copy.
 
-Right-click any folder or file in Finder → **Quick Actions** → **📌 Pin**. It appears in the 📌 menu-bar list immediately (the menu re-reads the file every time it opens, so there is nothing to refresh).
+Right-click any folder or file in Finder → **Quick Actions** (or **Services**) → **📌 Pin**. It appears in the 📌 menu-bar list immediately (the menu re-reads the file every time it opens, so there is nothing to refresh).
 
-If the actions do not show up in the menu, they may need enabling once: right-click → Quick Actions → **Customise…**, or System Settings → General → Login Items & Extensions → Extensions → **Finder**. If they still don't appear, refresh the Services registry and Finder:
+If the actions do not show up in the menu, refresh the Services registry and Finder:
 
 ```bash
 killall pbs; /System/Library/CoreServices/pbs -update; killall Finder
 ```
+
+They can also be toggled in System Settings → General → Login Items & Extensions → Extensions → **Finder**.
 
 ---
 

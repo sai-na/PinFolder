@@ -26,14 +26,15 @@ install: app
 	rm -rf $(DEST)/$(APP)
 	cp -R $(APP) $(DEST)/
 	python3 make-workflows.py
-	/System/Library/CoreServices/pbs -update
 	open $(DEST)/$(APP)
+	open "build/workflows/📌 Pin.workflow"
+	open "build/workflows/📌 Pin on Top.workflow"
+	open "build/workflows/📌 Pin to Sidebar.workflow"
 	@echo ""
-	@echo "Installed. A 📌 appears in the menu bar; right-click any file or folder"
-	@echo "in Finder -> Quick Actions for 📌 Pin, 📌 Pin on Top, 📌 Pin to Sidebar."
-	@echo "If the Quick Actions don't show up, enable them once in:"
-	@echo "  System Settings -> General -> Login Items & Extensions -> Extensions -> Finder"
-	@echo "or right-click -> Quick Actions -> Customise..."
+	@echo "A 📌 appeared in the menu bar, and macOS is showing three install"
+	@echo "prompts - click Install on each. That registers the actions as real"
+	@echo "Finder Quick Actions, so they show up under right-click -> Quick"
+	@echo "Actions (and Services) on any file or folder."
 
 uninstall:
 	-osascript -e 'quit app "PinFolder"' 2>/dev/null
