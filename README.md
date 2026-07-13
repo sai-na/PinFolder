@@ -72,6 +72,10 @@ See [BUILD.md](BUILD.md) for the full walkthrough and behaviour details.
 - The sidebar API is deprecated; if a future macOS removes it, the native
   fallback is selecting the folder and pressing ⌃⌘T (File → Add to Sidebar).
 
+## Author
+
+Built by **Sai Nath** — [LinkedIn](https://www.linkedin.com/in/sai-nath-849121221/) · [GitHub](https://github.com/sai-na)
+
 ## License
 
 [MIT](LICENSE)
