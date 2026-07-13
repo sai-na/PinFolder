@@ -21,7 +21,16 @@ Pin on Top shortcuts are ordinary symlinks.
 
 Requires the Xcode Command Line Tools (`xcode-select --install`). Everything
 compiles locally in a few seconds, so there is no unsigned-binary Gatekeeper
-dance:
+dance.
+
+**Homebrew:**
+
+```bash
+brew install sai-na/tap/pinfolder
+pinfolder-setup
+```
+
+**Or from a clone:**
 
 ```bash
 git clone https://github.com/sai-na/PinFolder.git
