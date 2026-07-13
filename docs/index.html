@@ -105,112 +105,127 @@ h2{font-family:var(--serif); font-weight:900; font-size:clamp(1.9rem,3.4vw,2.7re
 .card h3{font-family:var(--serif); font-weight:600; font-size:1.35rem; margin:.45rem 0 .55rem}
 .card p{font-size:.98rem; color:var(--ink-soft)}
 
-/* ============ real-macOS mockup demos (looping story animations) ============ */
-.mock{
-  --sysfont:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
-  margin-top:1.25rem; position:relative; border-radius:11px; overflow:hidden;
-  border:1px solid #d0c9ba; background:#f6f5f3; height:236px;
-  font-family:var(--sysfont); font-size:12px; color:#1d1d1f;
-  box-shadow:0 12px 28px -14px rgba(60,40,10,.35);
+/* ============ full-width desktop scenes (one pin type at a time) ============ */
+.feature{margin:78px 0 0}
+.feature .fnum{font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; color:var(--red)}
+.feature h3{font-family:var(--serif); font-weight:900; font-size:clamp(1.75rem,3.2vw,2.5rem); letter-spacing:-.02em; margin:.4rem 0 .6rem}
+.feature .fp{max-width:47rem; color:var(--ink-soft); font-size:1.06rem}
+.fcap{font-family:var(--mono); font-size:.72rem; color:var(--ink-soft); margin-top:.8rem}
+
+.scene{
+  --sys:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+  position:relative; margin-top:1.9rem; border:1.5px solid var(--ink); border-radius:16px;
+  box-shadow:9px 11px 0 var(--line); overflow:hidden; height:530px;
+  font-family:var(--sys); font-size:12.5px; color:#1d1d1f;
+  background:linear-gradient(155deg,#c4d2e8 0%,#dfd5c2 62%,#e9dfc9 100%);
 }
-.mock,.mock *{line-height:1.45}
-/* window chrome */
-.mtbar{display:flex; align-items:center; gap:6px; padding:8px 10px; background:#ececea; border-bottom:1px solid #d9d9d7}
-.mtbar .md{width:11px;height:11px;border-radius:50%}
-.mtbar .md:nth-child(1){background:#ff5f57}.mtbar .md:nth-child(2){background:#febc2e}.mtbar .md:nth-child(3){background:#28c840}
-.mtbar .mt{margin-left:6px; font-weight:600; font-size:11.5px; color:#4d4d4f}
+/* system menu bar */
+.sysbar{display:flex; align-items:center; gap:15px; padding:6px 16px; background:rgba(26,24,20,.92); color:#f4f1e9; font-size:12px}
+.sysbar .app{font-weight:700}
+.sysbar .dim{opacity:.75}
+.sysbar .sp{flex:1}
+.sysbar .mpin{display:inline-block}
+/* the Finder window */
+.win{
+  position:absolute; left:50%; transform:translateX(-50%); top:54px; width:min(880px,94%); bottom:-16px;
+  background:#f4f3f1; border-radius:12px 12px 0 0; box-shadow:0 26px 64px rgba(0,0,0,.38);
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.wtb{display:flex; align-items:center; gap:7px; padding:10px 12px; background:#ececea; border-bottom:1px solid #d8d8d6; flex:none}
+.wtb .md{width:12px;height:12px;border-radius:50%}
+.wtb .md:nth-child(1){background:#ff5f57}.wtb .md:nth-child(2){background:#febc2e}.wtb .md:nth-child(3){background:#28c840}
+.wtb .nav{color:#9a9aa0; font-size:15px; margin-left:8px}
+.wtb .wt{font-weight:600; font-size:12.5px; color:#3c3c3e; margin-left:6px}
+.wbody{flex:1; display:flex; min-height:0}
+.wsb{width:176px; flex:none; background:#e8e6e1; border-right:1px solid #d8d6d1; padding:10px 0; font-size:12px; color:#3a3a3c}
+.wsb .lab{font-size:10.5px; font-weight:700; color:#9a958c; padding:2px 14px 4px}
+.wsb .si{display:flex; gap:7px; align-items:center; padding:3.5px 14px}
+.wsb .si.on{background:#d6d3cc; border-radius:6px; margin:0 7px; padding:3.5px 7px}
+.wlist{flex:1; min-width:0; display:flex; flex-direction:column}
+.wcols{display:flex; padding:5px 14px; font-size:11px; color:#86868b; border-bottom:1px solid #e2e2e0; flex:none}
+.wcols .c1{flex:1}.wcols .c2{width:150px}.wcols .c3{width:76px}
+.wrows{list-style:none; padding:2px 0}
+.wrows li{display:flex; align-items:center; padding:4.5px 14px; white-space:nowrap}
+.wrows li:nth-child(even){background:#faf9f7}
+.wrows .nm{flex:1; display:flex; gap:8px; align-items:center; overflow:hidden; min-width:0}
+.wrows .dt{width:150px; color:#86868b; font-size:11px}
+.wrows .kd{width:76px; color:#86868b; font-size:11px}
+.dimname{color:#86868b}
 /* mac icons */
 .ifold{flex:none;width:15px;height:11px;border-radius:2px;background:linear-gradient(180deg,#74b9f9,#3d95ef);position:relative}
 .ifold::before{content:"";position:absolute;top:-2.5px;left:0;width:6px;height:3px;border-radius:1.5px 1.5px 0 0;background:#3d95ef}
 .ifile{flex:none;width:11px;height:14px;border-radius:1.5px;background:#fff;border:1px solid #c9c9c7;position:relative}
-.ifile::before{content:"";position:absolute;top:0;right:0;border:2.6px solid;border-color:#e4e4e2 #f6f5f3 transparent transparent}
-/* context menu (shared) */
-.ctx{
-  position:absolute; z-index:5; background:rgba(246,246,248,.97); border-radius:8px;
-  border:.5px solid #c9c9cc; box-shadow:0 10px 26px rgba(0,0,0,.22); padding:4px;
-  font-size:11.5px; min-width:132px; opacity:0; transform:scale(.92); transform-origin:top left;
-}
-.ctx div{padding:3px 10px; border-radius:5px; white-space:nowrap}
-.ctx .sel{background:#2864e0; color:#fff}
-/* finder rows */
-.mrows{list-style:none; padding:2px 0}
-.mrows li{display:flex; align-items:center; gap:7px; padding:4px 12px; white-space:nowrap}
-.mrows li .kk{margin-left:auto; color:#86868b; font-size:10.5px}
-.mrows li.msel{background:#2864e0; color:#fff}
-.mrows li.msel .kk{color:#cfe0ff}
-.mcols{display:flex; padding:4px 12px; font-size:10.5px; color:#86868b; border-bottom:1px solid #e5e5e3}
-.dimname{color:#86868b}
+.ifile::before{content:"";position:absolute;top:0;right:0;border:2.6px solid;border-color:#e4e4e2 #f4f3f1 transparent transparent}
 
-/* ---- demo 1: menu bar ---- */
-.mock.d1{background:linear-gradient(180deg,#e9e2d3,#efe9dc)}
-.d1 .mbar{display:flex; align-items:center; justify-content:flex-end; gap:12px; padding:5px 12px; background:rgba(28,25,20,.88); color:#f5f2ea; font-size:11.5px; backdrop-filter:blur(4px)}
-.d1 .mbar .mpin{animation:d1pinpulse 9s infinite}
-@keyframes d1pinpulse{0%,4%{transform:scale(1)}6%{transform:scale(1.35)}9%,100%{transform:scale(1)}}
-.d1 .dd{
-  position:absolute; right:64px; top:30px; width:196px; background:rgba(248,247,244,.98);
-  border-radius:9px; border:.5px solid #c9c9cc; box-shadow:0 14px 34px rgba(0,0,0,.25);
-  padding:4px; font-size:11.5px; opacity:0; transform:scale(.94); transform-origin:top right;
-  animation:d1open 9s infinite;
+/* the story: select -> right-click menu -> Services -> pin -> effect (11s loop) */
+.tgt{animation:tgtsel 11s infinite}
+.tgt .dt,.tgt .kd{animation:tgtmeta 11s infinite}
+@keyframes tgtsel{0%,4%{background:transparent;color:inherit}5%,39%{background:#2864e0;color:#fff}41%,100%{background:transparent;color:inherit}}
+@keyframes tgtmeta{0%,4%{color:#86868b}5%,39%{color:#cfe0ff}41%,100%{color:#86868b}}
+.cm{
+  position:absolute; z-index:6; background:rgba(247,247,249,.98); border-radius:8px;
+  border:.5px solid #c9c9cc; box-shadow:0 12px 30px rgba(0,0,0,.25); padding:4px;
+  font-size:12px; min-width:186px; opacity:0; transform:scale(.95); transform-origin:top left;
 }
-@keyframes d1open{0%,6%{opacity:0;transform:scale(.94)}9%,86%{opacity:1;transform:scale(1)}90%,100%{opacity:0;transform:scale(.94)}}
-.d1 .dd div{display:flex; align-items:center; gap:7px; padding:3.5px 9px; border-radius:5px}
-.d1 .dd .hr{height:1px; background:#dcdcda; margin:4px 6px; padding:0}
-.d1 .dd .r1{animation:d1h1 9s infinite}
-@keyframes d1h1{0%,24%,38%,100%{background:transparent;color:inherit}28%,34%{background:#2864e0;color:#fff}}
-.d1 .dd .r2{animation:d1h2 9s infinite}
-@keyframes d1h2{0%,40%,54%,100%{background:transparent;color:inherit}44%,50%{background:#2864e0;color:#fff}}
-.d1 .dd .r3{animation:d1h3 9s infinite}
-@keyframes d1h3{0%,56%,78%,100%{background:transparent;color:inherit}60%,74%{background:#2864e0;color:#fff}}
-.d1 .dd .aux{color:#6e6e73; font-size:11px}
-.d1 .cap{position:absolute; left:12px; bottom:10px; font-family:var(--mono); font-size:.66rem; color:var(--ink-soft)}
+.cm div{padding:3.5px 10px; border-radius:5px; display:flex; gap:8px; align-items:center; white-space:nowrap}
+.cm .sep{height:1px; background:#dcdcda; margin:4px 8px; padding:0}
+.cm .sub::after{content:"\25B8"; margin-left:auto; padding-left:16px; color:#86868b}
+.cm1{left:31%; top:42%; animation:cmin1 11s infinite}
+.cm2{left:57%; top:56%; min-width:196px; animation:cmin2 11s infinite}
+@keyframes cmin1{0%,8%{opacity:0;transform:scale(.95)}10%,39%{opacity:1;transform:scale(1)}41%,100%{opacity:0;transform:scale(.95)}}
+@keyframes cmin2{0%,18%{opacity:0;transform:scale(.95)}20%,39%{opacity:1;transform:scale(1)}41%,100%{opacity:0;transform:scale(.95)}}
+.cm1 .svc{animation:svchl 11s infinite}
+@keyframes svchl{0%,15%{background:transparent;color:inherit}17%,39%{background:#2864e0;color:#fff}41%,100%{background:transparent;color:inherit}}
+.cm2 .pick{animation:pickhl 11s infinite}
+@keyframes pickhl{0%,26%{background:transparent;color:inherit}28%,36%{background:#2864e0;color:#fff}38%,100%{background:transparent;color:inherit}}
+.wig{display:inline-block; animation:wig 11s infinite; transform-origin:bottom left}
+@keyframes wig{0%,49%,60%,100%{transform:rotate(0)}52%{transform:rotate(-16deg)}56%{transform:rotate(9deg)}}
 
-/* ---- demo 2: pin on top ---- */
-.d2 .pinrow{
-  max-height:0; opacity:0; padding-top:0!important; padding-bottom:0!important; overflow:hidden;
-  background:#dbe7ff; animation:d2pin 9s infinite;
+/* scene 1 effect: menu-bar dropdown */
+.s1 .mpin{animation:pinpulse 11s infinite}
+@keyframes pinpulse{0%,44%{transform:scale(1)}47%{transform:scale(1.45)}50%,100%{transform:scale(1)}}
+.dd{
+  position:absolute; right:88px; top:32px; z-index:7; width:212px; background:rgba(248,247,244,.98);
+  border-radius:9px; border:.5px solid #c9c9cc; box-shadow:0 16px 38px rgba(0,0,0,.3);
+  padding:4px; font-size:12px; opacity:0; transform:scale(.95); transform-origin:top right;
+  animation:ddopen 11s infinite;
 }
-.d2 .pinrow .wig{display:inline-block; animation:d2wig 9s infinite; transform-origin:bottom left}
-@keyframes d2pin{
-  0%,38%{max-height:0;opacity:0;padding-top:0;padding-bottom:0}
-  43%,86%{max-height:26px;opacity:1;padding-top:4px;padding-bottom:4px}
-  91%,100%{max-height:0;opacity:0;padding-top:0;padding-bottom:0}
-}
-@keyframes d2wig{0%,46%,58%,100%{transform:rotate(0)}49%{transform:rotate(-16deg)}53%{transform:rotate(9deg)}}
-.d2 .src{animation:d2sel 9s infinite}
-@keyframes d2sel{0%,6%{background:transparent;color:inherit}9%,34%{background:#2864e0;color:#fff}38%,100%{background:transparent;color:inherit}}
-.d2 .src .kk{animation:d2selk 9s infinite}
-@keyframes d2selk{0%,6%{color:#86868b}9%,34%{color:#cfe0ff}38%,100%{color:#86868b}}
-.d2 .ctx{left:46%; top:56%; animation:d2ctx 9s infinite}
-.d2 .ctx .sel{animation:d2ctxsel 9s infinite}
-@keyframes d2ctx{0%,12%{opacity:0;transform:scale(.92)}15%,33%{opacity:1;transform:scale(1)}36%,100%{opacity:0;transform:scale(.92)}}
-@keyframes d2ctxsel{0%,22%{background:transparent;color:inherit}26%,33%{background:#2864e0;color:#fff}36%,100%{background:transparent;color:inherit}}
+@keyframes ddopen{0%,45%{opacity:0;transform:scale(.95)}48%,86%{opacity:1;transform:scale(1)}90%,100%{opacity:0;transform:scale(.95)}}
+.dd div{display:flex; align-items:center; gap:8px; padding:3.5px 10px; border-radius:5px}
+.dd .sep{height:1px; background:#dcdcda; margin:4px 8px; padding:0}
+.dd .aux{color:#6e6e73; font-size:11.5px}
+.dd .new{animation:ddhl 11s infinite}
+@keyframes ddhl{0%,51%{background:transparent;color:inherit}53%,60%{background:#2864e0;color:#fff}63%,100%{background:transparent;color:inherit}}
 
-/* ---- demo 3: sidebar ---- */
-.d3 .body3{display:flex; height:calc(100% - 31px)}
-.d3 .sb{width:43%; background:#e7e4de; border-right:1px solid #d6d3cc; padding:8px 0 0}
-.d3 .sb .lab{font-size:10px; font-weight:700; color:#9a958c; padding:0 12px 4px}
-.d3 .sb .si{display:flex; align-items:center; gap:7px; padding:3.5px 12px; font-size:11.5px; color:#3a3a3c}
-.d3 .sb .newsi{max-height:0; opacity:0; overflow:hidden; padding-top:0; padding-bottom:0; animation:d3add 9s infinite}
-.d3 .sb .newsi .wig{display:inline-block; animation:d2wig 9s infinite; transform-origin:bottom left}
-@keyframes d3add{
-  0%,38%{max-height:0;opacity:0;padding-top:0;padding-bottom:0}
-  43%,86%{max-height:24px;opacity:1;padding-top:3.5px;padding-bottom:3.5px}
-  91%,100%{max-height:0;opacity:0;padding-top:0;padding-bottom:0}
+/* scene 2 effect: pinned row springs to the top of the list */
+.pinrow{
+  max-height:0; opacity:0; overflow:hidden; padding-top:0!important; padding-bottom:0!important;
+  background:#dbe7ff!important; animation:fxrow 11s infinite;
 }
-.d3 .cont{flex:1; padding:14px 12px; display:flex; flex-direction:column; align-items:center; gap:6px}
-.d3 .bigfold{width:52px;height:38px;border-radius:5px;background:linear-gradient(180deg,#74b9f9,#3d95ef);position:relative; margin-top:8px}
-.d3 .bigfold::before{content:"";position:absolute;top:-6px;left:0;width:20px;height:7px;border-radius:4px 4px 0 0;background:#3d95ef}
-.d3 .tile{padding:6px 8px; border-radius:8px; text-align:center; animation:d3sel 9s infinite}
-@keyframes d3sel{0%,6%{background:transparent}9%,34%{background:rgba(40,100,224,.16)}38%,100%{background:transparent}}
-.d3 .tile .tn{font-size:11px; margin-top:5px; padding:0 5px; border-radius:4px; animation:d3name 9s infinite}
-@keyframes d3name{0%,6%{background:transparent;color:inherit}9%,34%{background:#2864e0;color:#fff}38%,100%{background:transparent;color:inherit}}
-.d3 .ctx{left:38%; top:44%; animation:d2ctx 9s infinite}
-.d3 .ctx .sel{animation:d2ctxsel 9s infinite}
+@keyframes fxrow{
+  0%,43%{max-height:0;opacity:0;padding-top:0;padding-bottom:0}
+  47%,85%{max-height:30px;opacity:1;padding-top:4.5px;padding-bottom:4.5px}
+  90%,100%{max-height:0;opacity:0;padding-top:0;padding-bottom:0}
+}
 
+/* scene 3 effect: item slides into the sidebar */
+.newsi{max-height:0; opacity:0; overflow:hidden; padding-top:0!important; padding-bottom:0!important; animation:fxrow 11s infinite}
+
+@media (max-width:760px){
+  .scene{height:440px; font-size:11.5px}
+  .wsb{display:none}
+  .wcols .c2,.wrows .dt{display:none}
+  .s3 .wsb{display:block; width:132px}
+  .cm{min-width:150px; font-size:11px}
+  .cm1{left:14%; top:38%}
+  .cm2{left:46%; top:52%}
+  .dd{right:12px}
+}
 @media (prefers-reduced-motion:reduce){
-  .d2 .pinrow,.d3 .sb .newsi{max-height:26px;opacity:1;padding-top:4px;padding-bottom:4px}
-  .d1 .dd{opacity:1;transform:none}
-  .ctx{opacity:0!important}
+  .pinrow,.newsi{max-height:30px;opacity:1;padding-top:4.5px;padding-bottom:4.5px}
+  .dd{opacity:1;transform:none}
+  .cm{opacity:0!important}
+  .tgt{background:transparent}
 }
 
 /* plain text section */
@@ -290,62 +305,185 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
 <section id="how">
   <span class="kicker">One right-click, three pins</span>
   <h2>Pick where it should follow you.</h2>
-  <div class="features">
-    <div class="card">
-      <div class="n">01 · 📌 PIN</div>
-      <h3>To the menu bar</h3>
-      <p>A 📌 in the macOS menu bar lists your pins from anywhere — folders open in Finder, files open in their app. It's a plain text file underneath.</p>
-      <div class="mock d1" role="img" aria-label="The macOS menu bar with the PinFolder menu open, listing pinned items">
-        <div class="mbar"><span class="mpin">📌</span><span>🔍</span><span>100%</span><span>Tue 14 Jul&nbsp;&nbsp;2:30 AM</span></div>
-        <div class="dd">
-          <div class="r1"><span class="ifold"></span>project-alpha</div>
-          <div class="r2"><span class="ifile"></span>tax-2026.numbers</div>
-          <div class="r3"><span class="ifold"></span>Downloads</div>
-          <div class="hr"></div>
-          <div class="aux">Pin Files or Folders…&nbsp;&nbsp;⌘P</div>
-          <div class="aux">Unpin&nbsp;&nbsp;▸</div>
-        </div>
-        <div class="cap">// click 📌 anytime, anywhere</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="n">02 · 📌 PIN ON TOP</div>
-      <h3>To the top of its folder</h3>
-      <p>Creates a tiny <code>&nbsp;📌&nbsp;name</code> shortcut that out-sorts every other name — dotfiles and [brackets] included. Your original is never renamed.</p>
-      <div class="mock d2" role="img" aria-label="A Finder window where right-clicking a file pins a shortcut to the top of the list">
-        <div class="mtbar"><span class="md"></span><span class="md"></span><span class="md"></span><span class="mt">Documents</span></div>
-        <div class="mcols">Name&nbsp;↑</div>
-        <ul class="mrows">
-          <li class="pinrow"><span class="wig">📌</span><span class="ifile"></span>keynote.key<span class="kk">Shortcut</span></li>
-          <li><span class="ifile"></span><span class="dimname">.DS_Store</span><span class="kk">—</span></li>
-          <li><span class="ifold"></span><span class="dimname">[archive] 2025</span><span class="kk">Folder</span></li>
-          <li><span class="ifold"></span>assets<span class="kk">Folder</span></li>
-          <li class="src"><span class="ifile"></span>keynote.key<span class="kk">Keynote</span></li>
-        </ul>
-        <div class="ctx"><div>Open</div><div>Get Info</div><div class="sel">📌 Pin on Top</div></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="n">03 · 📌 PIN TO SIDEBAR</div>
-      <h3>To the Finder sidebar</h3>
-      <p>Toggles the item in Favourites — same as dragging it there, without the dragging. Right-click again to remove.</p>
-      <div class="mock d3" role="img" aria-label="A Finder window where right-clicking a folder adds it to the sidebar Favourites">
-        <div class="mtbar"><span class="md"></span><span class="md"></span><span class="md"></span><span class="mt">Projects</span></div>
-        <div class="body3">
-          <div class="sb">
+  <p style="max-width:46rem;color:var(--ink-soft)">Every pin lives in the menu your hands already know: right-click → <strong>Services</strong> (or <strong>Quick Actions</strong>, depending on your macOS). Watch each one do its thing:</p>
+
+  <!-- ============ 01 · PIN → MENU BAR ============ -->
+  <div class="feature">
+    <div class="fnum">01 · 📌 PIN</div>
+    <h3>To the menu bar.</h3>
+    <p class="fp">A 📌 lives in the macOS menu bar and lists your pins from anywhere — no Finder window needed. Folders open in Finder, files open in their own app. Underneath it's a plain text file you can edit by hand.</p>
+    <div class="scene s1" role="img" aria-label="Right-clicking the GitHub folder, choosing Services then 📌 Pin, and the folder appearing in the menu-bar 📌 list">
+      <div class="sysbar"><span class="app">Finder</span><span class="dim">File</span><span class="dim">Edit</span><span class="dim">View</span><span class="dim">Go</span><span class="sp"></span><span class="mpin">📌</span><span>🔍</span><span>100%</span><span>Tue 14 Jul&nbsp;&nbsp;2:41 AM</span></div>
+      <div class="win">
+        <div class="wtb"><span class="md"></span><span class="md"></span><span class="md"></span><span class="nav">‹ ›</span><span class="wt">Documents</span></div>
+        <div class="wbody">
+          <div class="wsb">
             <div class="lab">Favourites</div>
+            <div class="si"><span class="ifold"></span>Recents</div>
+            <div class="si"><span class="ifold"></span>Applications</div>
             <div class="si"><span class="ifold"></span>Desktop</div>
-            <div class="si"><span class="ifold"></span>Documents</div>
+            <div class="si on"><span class="ifold"></span>Documents</div>
             <div class="si"><span class="ifold"></span>Downloads</div>
-            <div class="si newsi"><span class="wig">📌</span><span class="ifold"></span>project-alpha</div>
+            <div class="lab" style="margin-top:8px">Locations</div>
+            <div class="si"><span class="ifold"></span>iCloud Drive</div>
           </div>
-          <div class="cont">
-            <div class="tile"><div class="bigfold"></div><div class="tn">project-alpha</div></div>
+          <div class="wlist">
+            <div class="wcols"><span class="c1">Name ↑</span><span class="c2">Date Modified</span><span class="c3">Kind</span></div>
+            <ul class="wrows">
+              <li><span class="nm"><span class="ifold"></span>Adobe</span><span class="dt">20 Jan 2026 at 6:26 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>books</span><span class="dt">11 Nov 2025 at 6:00 PM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifile"></span>Frame 2.png</span><span class="dt">26 Mar 2026 at 4:01 PM</span><span class="kd">PNG image</span></li>
+              <li class="tgt"><span class="nm"><span class="ifold"></span>GitHub</span><span class="dt">Today at 1:28 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>keys</span><span class="dt">20 Feb 2026 at 1:39 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>Obsidian Vault</span><span class="dt">13 Mar 2026 at 12:04 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifile"></span>s.pdf</span><span class="dt">12 Feb 2026 at 3:01 AM</span><span class="kd">PDF</span></li>
+              <li><span class="nm"><span class="ifold"></span>screenshots</span><span class="dt">27 Mar 2026 at 7:07 AM</span><span class="kd">Folder</span></li>
+            </ul>
           </div>
         </div>
-        <div class="ctx"><div>Open in New Tab</div><div>Get Info</div><div class="sel">📌 Pin to Sidebar</div></div>
+      </div>
+      <div class="cm cm1">
+        <div>Open in New Tab</div>
+        <div class="sep"></div>
+        <div>Get Info</div>
+        <div class="sep"></div>
+        <div>Copy “GitHub” as Pathname</div>
+        <div>Open in Terminal</div>
+        <div class="sep"></div>
+        <div class="svc sub">Services</div>
+      </div>
+      <div class="cm cm2">
+        <div class="pick">📌 Pin</div>
+        <div>📌 Pin on Top</div>
+        <div>📌 Pin to Sidebar</div>
+        <div class="sep"></div>
+        <div>Folder Actions Setup…</div>
+        <div>New Terminal at Folder</div>
+      </div>
+      <div class="dd">
+        <div class="new"><span class="wig">📌</span><span class="ifold"></span>GitHub</div>
+        <div><span class="ifold"></span>project-alpha</div>
+        <div><span class="ifile"></span>tax-2026.numbers</div>
+        <div class="sep"></div>
+        <div class="aux">Pin Files or Folders…&nbsp;&nbsp;⌘P</div>
+        <div class="aux">Unpin&nbsp;&nbsp;▸</div>
       </div>
     </div>
+    <p class="fcap">// right-click → Services → 📌 Pin — and it's in the 📌 menu, top-right of your screen</p>
+  </div>
+
+  <!-- ============ 02 · PIN ON TOP ============ -->
+  <div class="feature">
+    <div class="fnum">02 · 📌 PIN ON TOP</div>
+    <h3>To the top of its folder.</h3>
+    <p class="fp">Creates a tiny <code style="font-family:var(--mono);font-size:.85em">&nbsp;📌&nbsp;name</code> shortcut that out-sorts every other name — dotfiles and [brackets] included. Your original file is never renamed, never moved. Right-click again to unpin.</p>
+    <div class="scene s2" role="img" aria-label="Right-clicking the GitHub folder, choosing Services then 📌 Pin on Top, and a pinned shortcut appearing at the very top of the list">
+      <div class="sysbar"><span class="app">Finder</span><span class="dim">File</span><span class="dim">Edit</span><span class="dim">View</span><span class="dim">Go</span><span class="sp"></span><span>📌</span><span>🔍</span><span>100%</span><span>Tue 14 Jul&nbsp;&nbsp;2:42 AM</span></div>
+      <div class="win">
+        <div class="wtb"><span class="md"></span><span class="md"></span><span class="md"></span><span class="nav">‹ ›</span><span class="wt">Documents</span></div>
+        <div class="wbody">
+          <div class="wsb">
+            <div class="lab">Favourites</div>
+            <div class="si"><span class="ifold"></span>Recents</div>
+            <div class="si"><span class="ifold"></span>Applications</div>
+            <div class="si"><span class="ifold"></span>Desktop</div>
+            <div class="si on"><span class="ifold"></span>Documents</div>
+            <div class="si"><span class="ifold"></span>Downloads</div>
+            <div class="lab" style="margin-top:8px">Locations</div>
+            <div class="si"><span class="ifold"></span>iCloud Drive</div>
+          </div>
+          <div class="wlist">
+            <div class="wcols"><span class="c1">Name ↑</span><span class="c2">Date Modified</span><span class="c3">Kind</span></div>
+            <ul class="wrows">
+              <li class="pinrow"><span class="nm"><span class="wig">📌</span><span class="ifold"></span>GitHub</span><span class="dt">Today at 2:42 AM</span><span class="kd">Shortcut</span></li>
+              <li><span class="nm"><span class="ifile"></span><span class="dimname">.config</span></span><span class="dt">4 Jan 2026 at 9:12 AM</span><span class="kd">—</span></li>
+              <li><span class="nm"><span class="ifold"></span><span class="dimname">[archive] 2025</span></span><span class="dt">2 Nov 2025 at 5:30 PM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>Adobe</span><span class="dt">20 Jan 2026 at 6:26 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>books</span><span class="dt">11 Nov 2025 at 6:00 PM</span><span class="kd">Folder</span></li>
+              <li class="tgt"><span class="nm"><span class="ifold"></span>GitHub</span><span class="dt">Today at 1:28 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>Obsidian Vault</span><span class="dt">13 Mar 2026 at 12:04 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>screenshots</span><span class="dt">27 Mar 2026 at 7:07 AM</span><span class="kd">Folder</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cm cm1">
+        <div>Open in New Tab</div>
+        <div class="sep"></div>
+        <div>Get Info</div>
+        <div class="sep"></div>
+        <div>Copy “GitHub” as Pathname</div>
+        <div>Open in Terminal</div>
+        <div class="sep"></div>
+        <div class="svc sub">Services</div>
+      </div>
+      <div class="cm cm2">
+        <div>📌 Pin</div>
+        <div class="pick">📌 Pin on Top</div>
+        <div>📌 Pin to Sidebar</div>
+        <div class="sep"></div>
+        <div>Folder Actions Setup…</div>
+        <div>New Terminal at Folder</div>
+      </div>
+    </div>
+    <p class="fcap">// the shortcut lands above .config and [archive] 2025 — whitespace out-sorts punctuation</p>
+  </div>
+
+  <!-- ============ 03 · PIN TO SIDEBAR ============ -->
+  <div class="feature">
+    <div class="fnum">03 · 📌 PIN TO SIDEBAR</div>
+    <h3>To the Finder sidebar.</h3>
+    <p class="fp">Toggles the item in Favourites — same as dragging it there, without the dragging. It shows up in every Finder window and every open/save dialog. Right-click again to remove it.</p>
+    <div class="scene s3" role="img" aria-label="Right-clicking the GitHub folder, choosing Services then 📌 Pin to Sidebar, and GitHub appearing in the Favourites sidebar">
+      <div class="sysbar"><span class="app">Finder</span><span class="dim">File</span><span class="dim">Edit</span><span class="dim">View</span><span class="dim">Go</span><span class="sp"></span><span>📌</span><span>🔍</span><span>100%</span><span>Tue 14 Jul&nbsp;&nbsp;2:43 AM</span></div>
+      <div class="win">
+        <div class="wtb"><span class="md"></span><span class="md"></span><span class="md"></span><span class="nav">‹ ›</span><span class="wt">Documents</span></div>
+        <div class="wbody">
+          <div class="wsb">
+            <div class="lab">Favourites</div>
+            <div class="si"><span class="ifold"></span>Recents</div>
+            <div class="si"><span class="ifold"></span>Applications</div>
+            <div class="si"><span class="ifold"></span>Desktop</div>
+            <div class="si on"><span class="ifold"></span>Documents</div>
+            <div class="si"><span class="ifold"></span>Downloads</div>
+            <div class="si newsi"><span class="wig">📌</span><span class="ifold"></span>GitHub</div>
+            <div class="lab" style="margin-top:8px">Locations</div>
+            <div class="si"><span class="ifold"></span>iCloud Drive</div>
+          </div>
+          <div class="wlist">
+            <div class="wcols"><span class="c1">Name ↑</span><span class="c2">Date Modified</span><span class="c3">Kind</span></div>
+            <ul class="wrows">
+              <li><span class="nm"><span class="ifold"></span>Adobe</span><span class="dt">20 Jan 2026 at 6:26 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>books</span><span class="dt">11 Nov 2025 at 6:00 PM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifile"></span>Frame 2.png</span><span class="dt">26 Mar 2026 at 4:01 PM</span><span class="kd">PNG image</span></li>
+              <li class="tgt"><span class="nm"><span class="ifold"></span>GitHub</span><span class="dt">Today at 1:28 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>keys</span><span class="dt">20 Feb 2026 at 1:39 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>Obsidian Vault</span><span class="dt">13 Mar 2026 at 12:04 AM</span><span class="kd">Folder</span></li>
+              <li><span class="nm"><span class="ifold"></span>screenshots</span><span class="dt">27 Mar 2026 at 7:07 AM</span><span class="kd">Folder</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cm cm1">
+        <div>Open in New Tab</div>
+        <div class="sep"></div>
+        <div>Get Info</div>
+        <div class="sep"></div>
+        <div>Copy “GitHub” as Pathname</div>
+        <div>Open in Terminal</div>
+        <div class="sep"></div>
+        <div class="svc sub">Services</div>
+      </div>
+      <div class="cm cm2">
+        <div>📌 Pin</div>
+        <div>📌 Pin on Top</div>
+        <div class="pick">📌 Pin to Sidebar</div>
+        <div class="sep"></div>
+        <div>Folder Actions Setup…</div>
+        <div>New Terminal at Folder</div>
+      </div>
+    </div>
+    <p class="fcap">// GitHub slides into Favourites — in every window and every open/save dialog</p>
   </div>
 </section>
 
