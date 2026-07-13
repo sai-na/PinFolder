@@ -46,15 +46,15 @@ h1{
 h1 em{font-style:italic; font-weight:400; color:var(--red)}
 .hero p.lede{margin:1.4rem 0 2rem; font-size:1.18rem; color:var(--ink-soft); max-width:34rem}
 .install{
-  display:flex; align-items:stretch; border:1.5px solid var(--ink); border-radius:10px;
-  background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:.86rem;
-  overflow:hidden; max-width:30rem; box-shadow:5px 5px 0 var(--line);
+  display:flex; align-items:stretch; border:1.5px solid var(--ink); border-radius:12px;
+  background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:1.02rem;
+  overflow:hidden; box-shadow:6px 6px 0 var(--line);
 }
-.install code{padding:.95rem 1.2rem; flex:1; white-space:nowrap; overflow-x:auto}
+.install code{padding:1.15rem 1.3rem; flex:1; white-space:pre; overflow-x:auto; line-height:1.8}
 .install code .c{color:#8b857a}
 .install button{
-  border:0; background:var(--red); color:#fff; font-family:var(--mono); font-size:.78rem;
-  padding:0 1.1rem; cursor:pointer; letter-spacing:.05em;
+  border:0; background:var(--red); color:#fff; font-family:var(--mono); font-size:.88rem;
+  padding:0 1.35rem; cursor:pointer; letter-spacing:.05em; flex:none;
 }
 .install button:hover{background:var(--red-deep)}
 .hero .ghlink{display:inline-block; margin-top:1.1rem; font-family:var(--mono); font-size:.82rem}
@@ -289,7 +289,8 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
     <h1>Pin anything.<br><em>Right where you look.</em></h1>
     <p class="lede">Finder has favourites, but no pins. PinFolder adds them — a menu-bar quick-open list, a pin that floats a file to the top of its own folder, and a sidebar toggle. All from one right-click.</p>
     <div class="install">
-      <code id="cmd"><span class="c">$</span> git clone https://github.com/sai-na/PinFolder && cd PinFolder && make install</code>
+      <code id="cmd"><span class="c">$</span> git clone https://github.com/sai-na/PinFolder
+<span class="c">$</span> cd PinFolder && make install</code>
       <button onclick="navigator.clipboard.writeText('git clone https://github.com/sai-na/PinFolder && cd PinFolder && make install').then(()=>{this.textContent='COPIED';setTimeout(()=>this.textContent='COPY',1400)})">COPY</button>
     </div>
     <a class="ghlink" href="https://github.com/sai-na/PinFolder">★ Free & open source · MIT · builds locally in seconds</a>
