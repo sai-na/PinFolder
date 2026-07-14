@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — PinFolder</title>
+<meta name="description" content="PinFolder's privacy policy: the app runs entirely on your Mac, collects nothing, and sends nothing anywhere.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://sai-na.github.io/PinFolder/privacy.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PinFolder">
+<meta property="og:title" content="Privacy Policy — PinFolder">
+<meta property="og:description" content="PinFolder collects nothing, stores nothing outside your Mac, and sends nothing anywhere. The full privacy policy.">
+<meta property="og:url" content="https://sai-na.github.io/PinFolder/privacy.html">
+<meta property="og:image" content="https://sai-na.github.io/PinFolder/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy — PinFolder">
+<meta name="twitter:description" content="PinFolder collects nothing, stores nothing outside your Mac, and sends nothing anywhere. The full privacy policy.">
+<meta name="twitter:image" content="https://sai-na.github.io/PinFolder/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf5ec; --paper-deep:#f3ecdf; --ink:#211d17; --ink-soft:#5c554a;
+  --red:#c33d21; --red-deep:#9e2f18; --line:#e2d8c6;
+  --serif:"Fraunces",Georgia,serif; --body:"Newsreader",Georgia,serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body); background:var(--paper); color:var(--ink); font-size:19px; line-height:1.65}
+a{color:var(--red); text-decoration-thickness:1px; text-underline-offset:3px}
+a:hover{color:var(--red-deep)}
+.wrap{max-width:760px; margin:0 auto; padding:0 24px}
+header{display:flex; justify-content:space-between; align-items:center; padding:28px 0}
+.mark{font-family:var(--serif); font-weight:900; font-size:1.25rem; letter-spacing:-.01em; text-decoration:none; color:var(--ink)}
+.mark .pin{display:inline-block; transform:rotate(-12deg); margin-right:.35rem}
+nav a{font-family:var(--mono); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; margin-left:22px}
+main{padding:28px 0 80px}
+.kicker{font-family:var(--mono); font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--red)}
+h1{font-family:var(--serif); font-weight:900; font-size:clamp(2rem,5vw,3rem); line-height:1.05; letter-spacing:-.02em; margin:.5rem 0 .6rem}
+.updated{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
+h2{font-family:var(--serif); font-weight:600; font-size:1.45rem; margin:2.2rem 0 .7rem}
+p,li{color:var(--ink-soft); margin-bottom:.9rem}
+p strong,li strong{color:var(--ink)}
+ul{padding-left:1.3rem}
+li{margin-bottom:.5rem}
+code{font-family:var(--mono); font-size:.85em; background:var(--paper-deep); padding:1px 7px; border-radius:6px}
+footer{border-top:1px solid var(--line); padding:26px 0 48px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px}
+footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="mark" href="./"><span class="pin">📌</span>PinFolder</a>
+  <nav>
+    <a href="./">Home</a>
+    <a href="https://github.com/sai-na/PinFolder">GitHub</a>
+  </nav>
+</header>
+
+<main>
+  <span class="kicker">Privacy</span>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 14 July 2026</p>
+
+  <h2>The short version</h2>
+  <p><strong>PinFolder collects nothing, stores nothing outside your Mac, and sends nothing anywhere.</strong> There are no accounts, no analytics, no telemetry, no crash reporting, and no network requests of any kind in the app.</p>
+
+  <h2>What the app stores — on your Mac only</h2>
+  <ul>
+    <li>Your pinned paths live in a plain-text file at <code>~/.pinned-folders</code>, one path per line. It never leaves your machine.</li>
+    <li>"Pin on Top" creates ordinary symlinks next to your files. "Pin to Sidebar" uses the macOS sidebar-favourites system.</li>
+    <li>The "start at login" preference is stored by macOS itself (SMAppService).</li>
+  </ul>
+  <p>Deleting these files, or running <code>pinfolder-setup uninstall</code> / <code>make uninstall</code>, removes everything the app ever created except your own pins file and shortcuts, which stay yours.</p>
+
+  <h2>What we can see</h2>
+  <p>Nothing. PinFolder has no server, and the developer receives no information about you or your files — ever.</p>
+
+  <h2>This website</h2>
+  <ul>
+    <li>The site is hosted on <strong>GitHub Pages</strong>. GitHub may log basic visit data (such as IP addresses) as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</li>
+    <li>Fonts are loaded from <strong>Google Fonts</strong>, which means your browser requests font files from Google. See <a href="https://policies.google.com/privacy">Google's privacy policy</a>.</li>
+    <li>The site itself sets no cookies and runs no analytics.</li>
+  </ul>
+
+  <h2>Installing via Homebrew</h2>
+  <p>If you install with <code>brew install sai-na/tap/pinfolder</code>, Homebrew downloads the source from GitHub and may collect its own anonymous usage analytics — that's Homebrew's behaviour, not PinFolder's. You can disable it with <code>brew analytics off</code>.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy ever changes, the update will be published on this page with a new date. Given what PinFolder is — a local, open-source utility — don't expect much to change.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Open an issue on <a href="https://github.com/sai-na/PinFolder/issues">GitHub</a> or reach the developer via the links on the <a href="./">home page</a>.</p>
+</main>
+
+<footer>
+  <span class="mark"><span class="pin">📌</span>PinFolder</span>
+  <span class="fm"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="https://github.com/sai-na/PinFolder/blob/main/LICENSE">MIT License</a></span>
+</footer>
+</div>
+</body>
+</html>
