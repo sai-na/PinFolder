@@ -28,8 +28,8 @@ install: app
 	python3 make-workflows.py
 	open $(DEST)/$(APP)
 	open "build/workflows/📌 Pin.workflow"
-	open "build/workflows/📌 Pin on Top.workflow"
-	open "build/workflows/📌 Pin to Sidebar.workflow"
+	open "build/workflows/🔝 Pin on Top.workflow"
+	open "build/workflows/🗂 Pin to Sidebar.workflow"
 	@echo ""
 	@echo "A 📌 appeared in the menu bar, and macOS is showing three install"
 	@echo "prompts - click Install on each. That registers the actions as real"
@@ -39,7 +39,8 @@ install: app
 uninstall:
 	-osascript -e 'quit app "PinFolder"' 2>/dev/null
 	rm -rf $(DEST)/$(APP)
-	rm -rf "$(SERVICES)/📌 Pin.workflow" "$(SERVICES)/📌 Pin on Top.workflow" "$(SERVICES)/📌 Pin to Sidebar.workflow"
+	rm -rf "$(SERVICES)/📌 Pin.workflow" "$(SERVICES)/🔝 Pin on Top.workflow" "$(SERVICES)/🗂 Pin to Sidebar.workflow"
+	rm -rf "$(SERVICES)/📌 Pin on Top.workflow" "$(SERVICES)/📌 Pin to Sidebar.workflow"  # pre-emoji-rename installs
 	-/System/Library/CoreServices/pbs -update
 	@echo "Uninstalled. Your pins file (~/.pinned-folders), any ' 📌 ' shortcut"
 	@echo "symlinks, and sidebar entries are left in place - remove them yourself"

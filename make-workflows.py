@@ -2,8 +2,12 @@
 """Generate the three PinFolder Finder Quick Action bundles:
 
   📌 Pin.workflow            <- pin-append.sh   (add to the menu-bar app's list)
-  📌 Pin on Top.workflow     <- pin-on-top.sh   (toggle a sort-first shortcut)
-  📌 Pin to Sidebar.workflow <- pin-sidebar.sh  (toggle in Finder Favourites)
+  🔝 Pin on Top.workflow     <- pin-on-top.sh   (toggle a sort-first shortcut)
+  🗂 Pin to Sidebar.workflow <- pin-sidebar.sh  (toggle in Finder Favourites)
+
+Each action carries its own emoji so the three are distinguishable at a
+glance - the Quick Actions menu renders icons as monochrome templates, so
+the emoji in the title is the only full-colour marker available.
 
 Bundles land in ./build/workflows by default (pass a directory to override).
 Install them by opening each one — the system Automator Installer registers
@@ -125,5 +129,5 @@ def build(menu_name, script_file):
 
 
 build("📌 Pin", "pin-append.sh")
-build("📌 Pin on Top", "pin-on-top.sh")
-build("📌 Pin to Sidebar", "pin-sidebar.sh")
+build("🔝 Pin on Top", "pin-on-top.sh")
+build("🗂 Pin to Sidebar", "pin-sidebar.sh")

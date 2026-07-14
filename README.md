@@ -12,8 +12,8 @@ Actions that fix that:
 | Right-click → Quick Actions | What it does |
 |---|---|
 | **📌 Pin** | Adds the item to the 📌 menu in the macOS menu bar — a global quick-open list. Folders open in Finder, files open in their default app. |
-| **📌 Pin on Top** | Floats the item to the **top of its own folder** in Finder by creating a ` 📌 name` shortcut that sorts before everything else. The original is never renamed or touched. Run again to unpin. |
-| **📌 Pin to Sidebar** | Toggles the item in the Finder sidebar **Favourites**. |
+| **🔝 Pin on Top** | Floats the item to the **top of its own folder** in Finder by creating a ` 📌 name` shortcut that sorts before everything else. The original is never renamed or touched. Run again to unpin. |
+| **🗂 Pin to Sidebar** | Toggles the item in the Finder sidebar **Favourites**. |
 
 ## See it in action
 
@@ -21,11 +21,11 @@ Actions that fix that:
 
 ![Right-click a folder, Quick Actions, Pin — it appears in the menu-bar 📌 list](docs/assets/pin-menubar.gif)
 
-**📌 Pin on Top — to the top of its folder**
+**🔝 Pin on Top — to the top of its folder**
 
 ![Pin on Top floats a shortcut above every other name, dotfiles included](docs/assets/pin-on-top.gif)
 
-**📌 Pin to Sidebar — Finder Favourites**
+**🗂 Pin to Sidebar — Finder Favourites**
 
 ![Pin to Sidebar toggles the folder in the Finder sidebar](docs/assets/pin-sidebar.gif)
 
