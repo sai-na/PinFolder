@@ -19,8 +19,8 @@ jobs:
       - name: Lint generated plists
         run: |
           plutil -lint "build/workflows/📌 Pin.workflow/Contents/document.wflow"
-          plutil -lint "build/workflows/📌 Pin on Top.workflow/Contents/document.wflow"
-          plutil -lint "build/workflows/📌 Pin to Sidebar.workflow/Contents/document.wflow"
+          plutil -lint "build/workflows/🔝 Pin on Top.workflow/Contents/document.wflow"
+          plutil -lint "build/workflows/🗂 Pin to Sidebar.workflow/Contents/document.wflow"
       - name: Smoke-test pin scripts
         run: |
           set -e
