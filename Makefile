@@ -17,9 +17,15 @@ pinsidebar: pinsidebar.m
 	clang -fobjc-arc -O2 -framework Foundation -framework CoreServices pinsidebar.m -o pinsidebar
 
 app: build
-	mkdir -p $(APP)/Contents/MacOS
+	mkdir -p $(APP)/Contents/MacOS $(APP)/Contents/Resources
 	cp PinFolder pinsidebar $(APP)/Contents/MacOS/
 	cp Info.plist $(APP)/Contents/Info.plist
+	cp AppIcon.icns $(APP)/Contents/Resources/
+
+# Regenerate AppIcon.icns + docs/assets logo/favicon/og-image (committed;
+# only needed after changing make-icon.swift)
+icon:
+	swift make-icon.swift
 
 install: app
 	-osascript -e 'quit app "PinFolder"' 2>/dev/null

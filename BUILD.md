@@ -4,8 +4,8 @@ A tiny macOS pinning setup for **folders and files**, built from four pieces:
 
 1. **A menu-bar app** (📌 in the menu bar): lists your pinned items. Click a folder to open it in Finder; click a file to open it in its default app. Pin via a picker, unpin from a submenu.
 2. **A Finder Quick Action**: right-click any folder or file → Quick Actions → **📌 Pin**. Adds the item to the menu-bar list.
-3. **A second Quick Action**: right-click → **🔝 Pin on Top**. Creates a `📌 <name>` shortcut (symlink) next to the item so it floats to the top of the folder's own Name-sorted list in Finder — the original is never renamed. Run it again to remove the shortcut. (See Step 3.)
-4. **A third Quick Action**: right-click → **🗂 Pin to Sidebar**. Toggles the item in the Finder window sidebar (Favourites), powered by the bundled `pinsidebar` helper. (See Step 4.)
+3. **A second Quick Action**: right-click → **📌 Pin on Top**. Creates a `📌 <name>` shortcut (symlink) next to the item so it floats to the top of the folder's own Name-sorted list in Finder — the original is never renamed. Run it again to remove the shortcut. (See Step 3.)
+4. **A third Quick Action**: right-click → **📌 Pin to Sidebar**. Toggles the item in the Finder window sidebar (Favourites), powered by the bundled `pinsidebar` helper. (See Step 4.)
 
 Both read and write the same plain-text file: **`~/.pinned-folders`** (one path per line, folders or files). That file is the whole "database". You can edit it by hand any time.
 
@@ -80,7 +80,7 @@ open "build/workflows/🔝 Pin on Top.workflow"     # click Install
 open "build/workflows/🗂 Pin to Sidebar.workflow" # click Install
 ```
 
-The shell logic lives in [`pin-append.sh`](pin-append.sh) (📌 Pin: add to the menu-bar list), [`pin-on-top.sh`](pin-on-top.sh) (🔝 Pin on Top, see Step 3), and [`pin-sidebar.sh`](pin-sidebar.sh) (Step 4). Edit a script, re-run the generator, and re-open the workflow to update the installed copy.
+The shell logic lives in [`pin-append.sh`](pin-append.sh) (📌 Pin: add to the menu-bar list), [`pin-on-top.sh`](pin-on-top.sh) (📌 Pin on Top, see Step 3), and [`pin-sidebar.sh`](pin-sidebar.sh) (Step 4). Edit a script, re-run the generator, and re-open the workflow to update the installed copy.
 
 Right-click any folder or file in Finder → **Quick Actions** (or **Services**) → **📌 Pin**. It appears in the 📌 menu-bar list immediately (the menu re-reads the file every time it opens, so there is nothing to refresh).
 
@@ -94,13 +94,13 @@ They can also be toggled in System Settings → General → Login Items & Extens
 
 ---
 
-## Step 3. The "🔝 Pin on Top" Quick Action (float an item to the top of its folder)
+## Step 3. The "📌 Pin on Top" Quick Action (float an item to the top of its folder)
 
 macOS has no real "pin to top of a Finder list" API — Finder always obeys the sort column. The only thing that overrules a **Name** sort is a name, so this action creates a **shortcut**: pinning `conval` makes a symlink `📌 conval → conval` in the same folder, which sorts above everything that starts with a digit or letter. The original folder or file is never renamed, so its path — and everything pointing at it (terminals, IDEs, git remotes, other pins) — keeps working.
 
 It installs with the generator in Step 2. Behaviour details:
 
-- **Toggle:** right-click → Quick Actions → **🔝 Pin on Top** pins; running it again on either the original **or** the `📌` shortcut unpins (deletes only the symlink, never real data).
+- **Toggle:** right-click → Quick Actions → **📌 Pin on Top** pins; running it again on either the original **or** the `📌` shortcut unpins (deletes only the symlink, never real data).
 - **The item appears twice:** the `📌` shortcut at the top, and the original in its normal alphabetical spot. That's the price of not renaming.
 - **Only overrules the Name sort, ascending, with groups off.** Sorted by Date/Size, by Name descending, or grouped (View → Use Groups), the shortcut doesn't float.
 - **Opens like the real thing:** double-clicking the shortcut opens the actual folder (or the file in its default app).
@@ -109,9 +109,9 @@ It installs with the generator in Step 2. Behaviour details:
 
 ---
 
-## Step 4. The "🗂 Pin to Sidebar" Quick Action (Finder Favourites)
+## Step 4. The "📌 Pin to Sidebar" Quick Action (Finder Favourites)
 
-Right-click any folder or file → Quick Actions → **🗂 Pin to Sidebar** adds it to the sidebar Favourites of every Finder window; run it again to remove it. It installs with the generator in Step 2 and calls the `pinsidebar` helper bundled inside PinFolder.app (source: [`pinsidebar.m`](pinsidebar.m), script: [`pin-sidebar.sh`](pin-sidebar.sh)).
+Right-click any folder or file → Quick Actions → **📌 Pin to Sidebar** adds it to the sidebar Favourites of every Finder window; run it again to remove it. It installs with the generator in Step 2 and calls the `pinsidebar` helper bundled inside PinFolder.app (source: [`pinsidebar.m`](pinsidebar.m), script: [`pin-sidebar.sh`](pin-sidebar.sh)).
 
 - Uses the deprecated-but-functional `LSSharedFileList` API (the same one the `mysides` tool uses) — if a macOS update ever kills it, the native fallbacks are ⌃⌘T (File → Add to Sidebar) and dragging the folder into the sidebar.
 - Sidebar items can also be removed natively: right-click the sidebar entry → **Remove from Sidebar**.

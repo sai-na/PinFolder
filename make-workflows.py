@@ -5,9 +5,12 @@
   🔝 Pin on Top.workflow     <- pin-on-top.sh   (toggle a sort-first shortcut)
   🗂 Pin to Sidebar.workflow <- pin-sidebar.sh  (toggle in Finder Favourites)
 
-Each action carries its own emoji so the three are distinguishable at a
-glance - the Quick Actions menu renders icons as monochrome templates, so
-the emoji in the title is the only full-colour marker available.
+File name and menu name are deliberately different. The system Quick Action
+Installer titles its dialog with the FILE name, and all three install prompts
+appear stacked on top of each other - the distinct 🔝/🗂 emoji is how you tell
+which one you're approving. The Quick Actions menu shows the NSMenuItem
+string instead, so all three present the classic 📌 there, and identical
+prefixes keep the menu in the original order: Pin, Pin on Top, Pin to Sidebar.
 
 Bundles land in ./build/workflows by default (pass a directory to override).
 Install them by opening each one — the system Automator Installer registers
@@ -25,9 +28,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUTDIR = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "build", "workflows")
 
 
-def build(menu_name, script_file):
+def build(file_name, menu_name, script_file):
     script = open(os.path.join(HERE, script_file)).read()
-    wf = os.path.join(OUTDIR, f"{menu_name}.workflow")
+    wf = os.path.join(OUTDIR, f"{file_name}.workflow")
 
     info = {
         "NSServices": [
@@ -128,6 +131,6 @@ def build(menu_name, script_file):
     print(wf)
 
 
-build("📌 Pin", "pin-append.sh")
-build("🔝 Pin on Top", "pin-on-top.sh")
-build("🗂 Pin to Sidebar", "pin-sidebar.sh")
+build("📌 Pin", "📌 Pin", "pin-append.sh")
+build("🔝 Pin on Top", "📌 Pin on Top", "pin-on-top.sh")
+build("🗂 Pin to Sidebar", "📌 Pin to Sidebar", "pin-sidebar.sh")

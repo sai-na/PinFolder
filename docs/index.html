@@ -5,7 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PinFolder — pin anything on macOS</title>
 <meta name="description" content="Pin files & folders on macOS three ways from one right-click: a menu-bar quick-open list, pin to the top of a Finder folder, pin to the sidebar. Open source, plain-text simple.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📌</text></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://sai-na.github.io/PinFolder/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PinFolder">
+<meta property="og:title" content="PinFolder — pin anything on macOS">
+<meta property="og:description" content="Pin files & folders on macOS three ways from one right-click: menu bar, top of folder, or Finder sidebar. Free & open source.">
+<meta property="og:url" content="https://sai-na.github.io/PinFolder/">
+<meta property="og:image" content="https://sai-na.github.io/PinFolder/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PinFolder — pin anything on macOS">
+<meta name="twitter:description" content="Pin files & folders on macOS three ways from one right-click: menu bar, top of folder, or Finder sidebar. Free & open source.">
+<meta name="twitter:image" content="https://sai-na.github.io/PinFolder/assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -38,6 +52,7 @@ nav a{font-family:var(--mono); font-size:.8rem; text-decoration:none; color:var(
 nav a:hover{color:var(--red)}
 
 /* hero */
+.applogo{display:block; margin-bottom:18px; filter:drop-shadow(0 6px 16px rgba(158,47,24,.25))}
 .hero{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; padding:64px 0 90px}
 h1{
   font-family:var(--serif); font-weight:900; font-size:clamp(2.6rem,5.4vw,4.3rem);
@@ -289,6 +304,7 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
 
 <section class="hero">
   <div>
+    <img class="applogo" src="assets/icon-256.png" alt="PinFolder app icon" width="88" height="88">
     <h1>Pin anything.<br><em>Right where you look.</em></h1>
     <p class="lede">Finder has favourites, but no pins. PinFolder adds them — a menu-bar quick-open list, a pin that floats a file to the top of its own folder, and a sidebar toggle. All from one right-click.</p>
     <div class="install">
@@ -377,8 +393,8 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
       </div>
       <div class="cm cm2">
         <div class="pick">📌 Pin</div>
-        <div>🔝 Pin on Top</div>
-        <div>🗂 Pin to Sidebar</div>
+        <div>📌 Pin on Top</div>
+        <div>📌 Pin to Sidebar</div>
         <div class="sep"></div>
         <div>Customise…</div>
       </div>
@@ -400,7 +416,7 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
     <div class="fnum">02 · 📌 PIN ON TOP</div>
     <h3>To the top of its folder.</h3>
     <p class="fp">Creates a tiny <code style="font-family:var(--mono);font-size:.85em">&nbsp;📌&nbsp;name</code> shortcut that out-sorts every other name — dotfiles and [brackets] included. Your original file is never renamed, never moved. Right-click again to unpin.</p>
-    <div class="scene s2" role="img" aria-label="Right-clicking the GitHub folder, choosing Services then 🔝 Pin on Top, and a pinned shortcut appearing at the very top of the list">
+    <div class="scene s2" role="img" aria-label="Right-clicking the GitHub folder, choosing Services then 📌 Pin on Top, and a pinned shortcut appearing at the very top of the list">
       <div class="sysbar"><span class="app">Finder</span><span class="dim">File</span><span class="dim">Edit</span><span class="dim">View</span><span class="dim">Go</span><span class="sp"></span><span>📌</span><span>🔍</span><span>100%</span><span>Tue 14 Jul&nbsp;&nbsp;2:42 AM</span></div>
       <div class="win">
         <div class="wtb"><span class="md"></span><span class="md"></span><span class="md"></span><span class="nav">‹ ›</span><span class="wt">Documents</span></div>
@@ -453,8 +469,8 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
       </div>
       <div class="cm cm2">
         <div>📌 Pin</div>
-        <div class="pick">🔝 Pin on Top</div>
-        <div>🗂 Pin to Sidebar</div>
+        <div class="pick">📌 Pin on Top</div>
+        <div>📌 Pin to Sidebar</div>
         <div class="sep"></div>
         <div>Customise…</div>
       </div>
@@ -468,7 +484,7 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
     <div class="fnum">03 · 📌 PIN TO SIDEBAR</div>
     <h3>To the Finder sidebar.</h3>
     <p class="fp">Toggles the item in Favourites — same as dragging it there, without the dragging. It shows up in every Finder window and every open/save dialog. Right-click again to remove it.</p>
-    <div class="scene s3" role="img" aria-label="Right-clicking the GitHub folder, choosing Services then 🗂 Pin to Sidebar, and GitHub appearing in the Favourites sidebar">
+    <div class="scene s3" role="img" aria-label="Right-clicking the GitHub folder, choosing Services then 📌 Pin to Sidebar, and GitHub appearing in the Favourites sidebar">
       <div class="sysbar"><span class="app">Finder</span><span class="dim">File</span><span class="dim">Edit</span><span class="dim">View</span><span class="dim">Go</span><span class="sp"></span><span>📌</span><span>🔍</span><span>100%</span><span>Tue 14 Jul&nbsp;&nbsp;2:43 AM</span></div>
       <div class="win">
         <div class="wtb"><span class="md"></span><span class="md"></span><span class="md"></span><span class="nav">‹ ›</span><span class="wt">Documents</span></div>
@@ -521,8 +537,8 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
       </div>
       <div class="cm cm2">
         <div>📌 Pin</div>
-        <div>🔝 Pin on Top</div>
-        <div class="pick">🗂 Pin to Sidebar</div>
+        <div>📌 Pin on Top</div>
+        <div class="pick">📌 Pin to Sidebar</div>
         <div class="sep"></div>
         <div>Customise…</div>
       </div>
