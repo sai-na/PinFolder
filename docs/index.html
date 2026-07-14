@@ -65,7 +65,7 @@ h1 em{font-style:italic; font-weight:400; color:var(--red)}
   background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:1.02rem;
   overflow:hidden; box-shadow:6px 6px 0 var(--line); max-width:fit-content;
 }
-.install code{padding:1.15rem 1.3rem; flex:1; white-space:pre; overflow-x:auto; line-height:1.8}
+.install code{padding:1.15rem 1.3rem; flex:1; white-space:pre; overflow-x:auto; min-width:0; line-height:1.8}
 .install code .c{color:#8b857a}
 .install button{
   border:0; background:var(--red); color:#fff; font-family:var(--mono); font-size:.88rem;
@@ -276,12 +276,16 @@ footer .fm{font-family:var(--mono); font-size:.75rem; color:var(--ink-soft)}
 
 @media (max-width:880px){
   .hero{grid-template-columns:1fr; gap:36px; padding:26px 0 44px}
+  .hero > div{min-width:0}
+  .install{max-width:100%; flex-direction:column; font-size:.86rem; box-shadow:4px 4px 0 var(--line)}
+  .install code{padding:1rem 1.1rem}
+  .install button{padding:.85rem 1.35rem}
   section{padding:52px 0}
   .feature{margin:56px 0 0}
   .scene{height:470px}
   .features{grid-template-columns:1fr}
   .plain,.steps{grid-template-columns:1fr; gap:32px}
-  .finder{transform:none; max-width:560px}
+  .finder{transform:none; max-width:min(560px,100%)}
   @keyframes drop{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 }
 @media (prefers-reduced-motion:reduce){
